@@ -22,7 +22,7 @@ def create(request):
     if request.method == 'POST':
         bound_form = CharacterForm(request.POST)
         if bound_form.is_valid():
-            c = Character.manager.new_character(bound_form)
+            c = Character.manager.new_character(bound_form.cleaned_data)
             return redirect(reverse('sheets:show', kwargs={'id':c['id']}))
         else:
             for e in bound_form.errors:
@@ -31,8 +31,10 @@ def create(request):
 
 def show(request, id):
     c = Character.get(id=id)
+    form = CharacterForm(c)
     context = {
-        'character': c
+        'character': c,
+        'form': form
     }
     return render(request, 'sheets/show.html', context)
 
