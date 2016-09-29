@@ -212,10 +212,18 @@ var Barbarian = {
             'weight':2
         },
         'slot5':{
-            'item':'Chanmail',
+            'item':'Chainmail',
             'type':'armor',
             'qty':1,
             'weight':1
         }
     }
 };
+
+        // ###Sample of how to clone an object###
+
+var barbarian2 = JSON.parse(JSON.stringify(Barbarian))
+barbarian2.inventory.slot1.qty = 10
+
+console.log(barbarian2.inventory.slot1.item,'-', barbarian2.inventory.slot1.qty)
+console.log(Barbarian.inventory.slot1.item,'-', Barbarian.inventory.slot1.qty)
