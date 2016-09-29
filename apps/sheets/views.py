@@ -23,8 +23,7 @@ def create(request):
         bound_form = CharacterForm(request.POST)
         if bound_form.is_valid():
             c = Character.manager.new_character(bound_form)
-            # TODO: redirect to show page for Character
-            return redirect(reverse('sheets:index'))
+            return redirect(reverse('sheets:show', kwargs={'id':c['id']}))
         else:
             for e in bound_form.errors:
                 messages.error(request, e)
