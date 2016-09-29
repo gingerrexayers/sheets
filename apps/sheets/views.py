@@ -22,7 +22,7 @@ def create(request):
     if request.method == 'POST':
         bound_form = CharacterForm(request.POST)
         if bound_form.is_valid():
-            c = Character.manager.create(bound_form)
+            c = Character.manager.new_character(bound_form)
             # TODO: redirect to show page for Character
             return redirect(reverse('sheets:index'))
         else:
@@ -30,5 +30,24 @@ def create(request):
                 messages.error(request, e)
     return redirect(reverse('sheets:add'))
 
-def show(request):
-    
+def show(request, id):
+    c = Character.get(id=id)
+    context = {
+        'character': c
+    }
+    return render(request, 'sheets/show.html', context)
+
+def update(request, id):
+    if request.method == 'POST':
+        bound_form = CharacterForm(id, request.POST)
+        if bound_form.is_valid():
+            Character.manager.update_character(bound_form)
+        else:
+            for e in bound_form.errors:
+                messages.error(request, e)
+    return redirect(reverse('sheets:show', kwargs={'id':id}))
+
+def delete(request, id):
+    c = Character.get(id=id)
+    c.delete()
+    return redirect(reverse('sheets:index'))
