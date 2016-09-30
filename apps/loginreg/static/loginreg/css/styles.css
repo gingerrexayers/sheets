@@ -70,3 +70,15 @@ form input[type='submit'] {
     width: 49%;
   }
 }
+
+#image {
+  width: 100%;
+  padding: 10px;
+}
+
+img {
+  max-width: 550px;
+  display: block;
+  margin: auto;
+  width: 100%;
+}
