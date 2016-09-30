@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('.rollable p').click(function(){
+  $('.rollable a').click(function(){
     var result = 0;
     var mod = 0;
     for (var x = 0; x < $(this).siblings('.dice').children('.die_count').val(); x++) {
