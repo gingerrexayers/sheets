@@ -24,7 +24,7 @@ def login(request):
         result = User.manager.login(request.POST)
         if result[0]:
             request.session['id'] = result[1].id
-            return redirect(reverse('login:loginsuccess'))
+            return redirect(reverse('login:success'))
         else:
             for e in result[1]:
                 messages.error(request, e)
@@ -36,3 +36,5 @@ def logout(request):
 
 def success(request):
     return redirect(reverse('sheets:index'))
+
+

@@ -7,8 +7,9 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    u = User.get(id=request.session['id'])
-    c = Character.filter(user=u)
+    print request.session['id']
+    u = User.manager.get(id=request.session['id'])
+    c = Character.objects.filter(user=u)
     context = {
         'user': u,
         'characters': c
