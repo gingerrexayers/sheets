@@ -1,11 +1,11 @@
 $(document).ready(function(){
-  $('.rollable').click(function(){
+  $('.rollable p').click(function(){
     var result = 0;
     var mod = 0;
-    for (var x = 0; x < $(this).find('.die_count').val(); x++) {
-      result += Math.ceil(Math.random() * $(this).find('.die_size').val());
+    for (var x = 0; x < $(this).siblings('.dice').children('.die_count').val(); x++) {
+      result += Math.ceil(Math.random() * $(this).siblings('.dice').children('.die_size').val());
     }
-    var str = $(this).children('input').val();
+    var str = $(this).siblings('input').val();
     if (str > 17) {
       mod = 3;
     } else if (str > 15) {
