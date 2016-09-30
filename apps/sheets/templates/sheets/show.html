@@ -1,17 +1,87 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang='en'>
 <head>
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+  <link rel='stylesheet' href='{% static "loginreg/css/undohtml.css" %}' />
+  <link rel='stylesheet' href='{% static "sheets/css/show.css" %}' />
+  <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+  <script src='{% static "sheets/js/roll.js" %}' charset="utf-8"></script>
   <title>{{character.name}}</title>
 </head>
 <body>
-  <form action='{% url "sheets:update" character.id %}' method='post'>
-    {% csrf_token %}
-    <input type='text' name='user' value='{{request.session.id}}' hidden/>
-    {{form.as_p}}
-    <input type='submit' value='Update'/>
-  </form>
+  <header>
+    <div id='title'>{{character.name}}</div>
+    <nav>
+      <a href='{% url "sheets:index" %}'>Back</a>
+      <a href='{% url "login:logout" %}'>Logout</a>
+    </nav>
+  </header>
+  <main>
+    <form action='{% url "sheets:update" character.id %}' method='post'>
+      {% csrf_token %}
+      <input type='text' name='user' value='{{request.session.id}}' hidden/>
+      <div id='info'>
+        {{form.name.label}}{{form.name}}
+        {{form.alignment.label}}{{form.alignment}}
+        {{form.race.label}}{{form.race}}
+        <label for='id_char_class'>Class</label>{{form.char_class}}
+        {{form.level.label}}{{form.level}}
+        {{form.exp.label}}{{form.exp}}
+        <label for='id_curr_hp'>HP:</label>{{form.curr_hp}}/{{form.max_hp}}
+        {{form.damage.label}}{{form.damage}}
+        {{form.armor.label}}{{form.armor}}
+      </div>
+      <div class='rollable'>
+        <p>Strength</p>
+        {{form.strength}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <div class='rollable'>
+        <p>Dexterity</p>
+        {{form.dexterity}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <div class='rollable'>
+        <p>Constitution</p>
+        {{form.constitution}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <div class='rollable'>
+        <p>Intelligence</p>
+        {{form.intelligence}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <div class='rollable'>
+        <p>Wisdom</p>
+        {{form.wisdom}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <div class='rollable'>
+        <p>Charisma</p>
+        {{form.charisma}}
+        <div class='dice'>
+          <input type='number' class='die_count' value='2'/>d<input type='number' class='die_size' value='6'/>
+        </div>
+      </div>
+      <input type='submit' value='Update'/>
+    </form>
+    <div id='roll_result'>
+      <p>Roll Result</p>
+      <p id='result'></p>
+    </div>
+  </main>
 </body>
 </html>

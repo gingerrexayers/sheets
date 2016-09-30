@@ -1,0 +1,84 @@
+body {
+  font-family: sans-serif;
+}
+
+header {
+  padding: 1em;
+  font-size: 1.5em;
+}
+
+#title {
+  display: inline-block;
+}
+
+nav {
+  float: right;
+}
+
+main {
+  width: 95%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#info input, #info select {
+  width: 100%;
+}
+
+#info label {
+  display: block;
+}
+
+#info #id_curr_hp, #info #id_max_hp {
+  display: inline-block;
+  width: 49%;
+}
+
+.rollable {
+  width: 100%;
+  display: inline-block;
+  padding: .5em;
+  border: 1px solid #000;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.rollable p {
+  width: 100%;
+  text-align: center;
+  font-weight:bold;
+  margin-bottom: .5em;
+}
+
+.rollable input {
+  width: 2.5em;
+}
+
+.dice {
+  display: inline-block;
+  float: right;
+}
+
+#roll_result {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+#roll_result p {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: .5em;
+}
+
+@media all and (min-width: 375px) {
+  .rollable {
+    width: 49%;
+  }
+}
+
+@media all and (min-width: 550px) {
+  .rollable {
+    width: 32%;
+  }
+}

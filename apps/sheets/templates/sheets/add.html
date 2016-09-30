@@ -7,6 +7,12 @@
   <title>New Character</title>
 </head>
 <body>
+  <header>
+    <nav>
+      <a href='{% url "sheets:index" %}'>Back</a>
+      <a href='{% url "login:logout" %}'>Logout</a>
+    </nav>
+  </header>
   <form action='{% url "sheets:create" %}' method='post'>
     {% csrf_token %}
     <input type='text' name='user' value='{{request.session.id}}' hidden/>
