@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django import forms
 from ..loginreg.models import User
 # Create your models here.
 class CharacterManager(models.Manager):
@@ -38,6 +39,20 @@ class CharacterManager(models.Manager):
         c.save()
         return True
 
+CLASS_CHOICES = (
+    ('ARCANE DUELIST', 'Arcane Duelist'),
+    ('BARBARIAN', 'Barbarian'),
+    ('BARD', 'Bard'),
+    ('CLERIC', 'Cleric'),
+    ('DRUID', 'Druid'),
+    ('FIGHTER', 'Fighter'),
+    ('IMMOLATOR', 'Immolator'),
+    ('PALADIN', 'Paladin'),
+    ('RANGER', 'Ranger'),
+    ('THIEF', 'Thief'),
+    ('WIZARD', 'Wizard')
+)
+
 class Character(models.Model):
     ### META ###
     user = models.ForeignKey(User)
@@ -45,7 +60,7 @@ class Character(models.Model):
     name = models.CharField(max_length=255)
     alignment = models.CharField(max_length=255)
     race = models.CharField(max_length=255)
-    char_class = models.CharField(max_length=255)
+    char_class = models.CharField(max_length=255, choices=CLASS_CHOICES)
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)
     ### STATS ###
