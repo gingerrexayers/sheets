@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+			$( function() {
+			$( "#draggable" ).draggable();
+			} );
+		</script>
+		<script>
+		$(document).ready(function(){
+			function roll(times, sides) {
+				rollval = []
+				if (sides){
+					for (var i = 0; i < times; i++) {
+						rollval.push(Math.floor(Math.random()*sides)+1);
+					}
+				}
+			    else {
+			    	for (var i = 0; i < times; i++) {
+			    		rollval.push(Math.floor(Math.random()*6)+1);
+			    	}
+			    }
+			    return rollval;
+			};
+			$('.roll').click(function(){
+				var rolls = $('input.numrolls').val();
+				var sides = $('input.numsides').val();
+				var results = roll(rolls, sides);
+				results = results.toString()
+				$('.results').html('['+results+']')
+			});
+		});
+		</script>
+		<style>
+			div#draggable {
+				background: lightgrey;
+				width: 150px;
+				height: 150px;
+				text-align: center;
+				padding: 10px;
+				border:3px solid black;
+				border-radius: 15px;
+			}
+			h3.results {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="draggable" class="ui-widget-content">
+			<button class="roll" id="strValue">Roll!</button><br>
+			<p>Rolls - <input type="text" maxlength="1" size="1" style="width:12px" class='numrolls'> | Sides - <input type="text" maxlength="2" size="2" style="width:18px; text-align:right" class='numsides'></p>
+			<p style="font-style: italic">default sides: 6</p>
+			<h3 class='results'></h3>
+		</div>
+	</body>
+
+</html>
