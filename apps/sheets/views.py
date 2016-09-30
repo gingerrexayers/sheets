@@ -26,12 +26,12 @@ def create(request):
     if request.method == 'POST':
         bound_form = CharacterForm(request.POST)
         if bound_form.is_valid():
-            c = Character.manager.new_character(bound_form.cleaned_data)
-            return redirect(reverse('sheets:show', kwargs={'id':c['id']}))
+            c = Character.manager.new_character(request.session['id'], bound_form.cleaned_data)
+            return redirect(reverse('sheets:show', kwargs={'id':c.id}))
     return redirect(reverse('sheets:add'))
 
 def show(request, id):
-    c = Character.get(id=id)
+    c = Character.manager.get(id=id)
     form = CharacterForm(instance=c)
     context = {
         'character': c,
@@ -41,12 +41,15 @@ def show(request, id):
 
 def update(request, id):
     if request.method == 'POST':
-        bound_form = CharacterForm(id, request.POST)
+        bound_form = CharacterForm(request.POST)
         if bound_form.is_valid():
-            Character.manager.update_character(bound_form)
+            Character.manager.update_character(id, bound_form.cleaned_data)
     return redirect(reverse('sheets:show', kwargs={'id':id}))
 
 def delete(request, id):
     c = Character.get(id=id)
     c.delete()
     return redirect(reverse('sheets:index'))
+
+def cards(request):
+    return render(request, 'sheets/cards.html')

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+    {% load static %}
+<!--
+    <link href="{% static 'sheets/css/materialize.min.css' %}" rel="stylesheet" media="screen,projection"/>
+    <script src="{% static 'sheets/js/materialize.min.js' %}"></script>
+-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Character</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+        div.draggable {
+            
+        }
+        div.resultdice {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border:3px solid black;
+            border-radius:5px;
+            display: inline-block;
+            box-shadow: 2px 2px grey;
+            font-size: 12pt;
+        }
+        button.roll {
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+        div.resultdice {
+            width: 25px;
+            height: 25px;
+            background: white;
+            border:3px solid black;
+            border-radius:5px;
+            display: inline-block;
+            box-shadow: 2px 2px grey;
+            margin:1px;
+        }
+        div#roll_card{
+            background: lightgrey;
+            width: 170px;
+            height: 170px;
+            text-align: center;
+            padding: 5px;
+            border:3px solid black;
+            border-radius: 15px;
+            box-shadow:4px 4px grey;
+        }
+        div#barb_card {
+            height:400px;
+            width:285px;
+            vertical-align: top;
+            background: #D1674F;
+            border: 12px solid lightgrey;
+            border-radius: 6px;
+            box-shadow: 3px 3px grey;
+        }
+        button.roll {
+            border: 1px solid black;
+            border-radius: 4px;
+            padding:2px 5px;
+        }
+        div.statholder {
+            position: absolute;
+            top: 120px;
+            left: 15px;
+        }
+        div.statdiv {
+            border:3px solid black;
+            border-radius: 8px;
+            width: 74px;
+            height: 74px;
+            background-color: rgba(211, 211, 211, 0.5);
+            box-shadow: 2px 2px grey;
+            display: inline-block;
+            border: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+			$( function() {
+			$( ".draggable" ).draggable();
+			} );
+		</script>
+		<script>
+		$(document).ready(function(){
+			function roll(times, sides) {
+				rollval = []
+				if (sides){
+					for (var i = 0; i < times; i++) {
+						rollval.push(Math.floor(Math.random()*sides)+1);
+					}
+				}
+			    else {
+			    	for (var i = 0; i < times; i++) {
+			    		rollval.push(Math.floor(Math.random()*6)+1);
+			    	}
+			    }
+			    return rollval;
+			};
+			$('.roll').click(function(){
+				var rolls = $('input.numrolls').val();
+				var sides = $('input.numsides').val();
+				var results = roll(rolls, sides);
+				resString = '';
+				console.log(results)
+				for (var i = 0; i<results.length; i++){
+					var newstring = "<div class='resultdice'>"+results[i].toString()+"</div>";
+					resString = resString + newstring;
+				};
+				$('.results').html(resString);
+			});
+		});
+		</script>
+</head>
+<body>
+        <div class="container">
+            
+            <div class="draggable ui-widget-content" id="barb_card">
+                <img style="display:inline-block; width:70px; position:absolute; left:8px; top:8px;" class="img-thumbnail" src="{% static 'sheets/img/barbarian.png'%}">
+                <p style="font-weight:800;position:absolute; left: 90px; padding-top:10px; display:inline-block">Conan The Barbarian <br><span style="font-style:italic">Chaotic Good</span><br><strong>Lvl 10</strong> | Exp: 85/150 </p>
+                <div class="statholder">
+                    <div class="statdiv"></div>
+                    <div class="statdiv"></div>
+                    <div class="statdiv"></div>
+                    <div class="statdiv"></div>
+                    <div class="statdiv"></div>
+                    <div class="statdiv"></div>
+                </div>
+                <p style="text-align:center;position:absolute; bottom:-10px; left:20px">HP 30/45 | Armor 8 | DMG 2d10</p>
+            </div>
+        
+            <div class="draggable ui-widget-content" id="roll_card">
+                <button class="roll" id="strValue">Roll!</button><br>
+                <p>Rolls - <input type="text" maxlength="1" size="1" style="width:16px" class='numrolls'> | Sides - <input type="text" maxlength="2" size="2" style="width:24px; text-align:right" class='numsides'></p>
+                <p style="font-style: italic; margin-top:-8px;">default sides: 6</p>
+                <h3 style="margin-top:-18px" class='results'></h3>
+            </div>
+            
+        </div>
+</body>
+</html>

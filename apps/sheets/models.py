@@ -4,8 +4,11 @@ from django.db import models
 from ..loginreg.models import User
 # Create your models here.
 class CharacterManager(models.Manager):
-    def new_character(self, form_data):
-        self.create(name=form_data['name'], alignment=form_data['alignment'],
+    def new_character(self, id, form_data):
+        u = User.manager.get(id=id)
+        c = self.create(
+            user=u,
+            name=form_data['name'], alignment=form_data['alignment'],
             race=form_data['race'], char_class=form_data['char_class'],
             level=form_data['level'], exp=form_data['exp'],
             curr_hp=form_data['curr_hp'], max_hp=form_data['max_hp'],
@@ -13,7 +16,7 @@ class CharacterManager(models.Manager):
             strength=form_data['strength'], dexterity=form_data['dexterity'],
             constitution=form_data['constitution'], intelligence=form_data['intelligence'],
             wisdom=form_data['wisdom'], charisma=form_data['charisma'])
-        return True
+        return c
     def update_character(self, id, form_data):
         c = self.get(id=id)
         c.name=form_data['name']
@@ -33,6 +36,7 @@ class CharacterManager(models.Manager):
         c.wisdom=form_data['wisdom']
         c.charisma=form_data['charisma']
         c.save()
+        return True
 
 class Character(models.Model):
     ### META ###

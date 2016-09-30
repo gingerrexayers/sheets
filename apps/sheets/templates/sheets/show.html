@@ -9,6 +9,7 @@
 <body>
   <form action='{% url "sheets:update" character.id %}' method='post'>
     {% csrf_token %}
+    <input type='text' name='user' value='{{request.session.id}}' hidden/>
     {{form.as_p}}
     <input type='submit' value='Update'/>
   </form>
