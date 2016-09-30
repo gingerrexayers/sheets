@@ -60,7 +60,7 @@ class Character(models.Model):
     name = models.CharField(max_length=255)
     alignment = models.CharField(max_length=255)
     race = models.CharField(max_length=255)
-    char_class = models.CharField(max_length=255, choices=CLASS_CHOICES)
+    char_class = models.CharField(max_length=14, choices=CLASS_CHOICES)
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)
     ### STATS ###
