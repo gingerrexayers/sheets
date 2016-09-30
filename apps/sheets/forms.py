@@ -5,4 +5,3 @@ class CharacterForm(forms.ModelForm):
     class Meta:
         model = Character
         exclude = ('user',)
-        
