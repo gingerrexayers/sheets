@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+  <title>Characters</title>
+</head>
+<body>
+  <header>
+    <nav><a href='{% url "login:logout" %}'>Logout</a></nav>
+  </header>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Level</th>
+    </tr>
+    {% for character in characters %}
+    <tr>
+      <td><a href='{% url "sheets:show" character.id %}'>{{character.name}}</a></td>
+      <td>{{character.class}}</td>
+      <td>{{character.level}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <footer>
+    <nav><a href='{% url "sheets:add" %}'>Add Character</a></nav>
+  </footer>
+</body>
+</html>

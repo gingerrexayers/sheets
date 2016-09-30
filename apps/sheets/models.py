@@ -34,7 +34,7 @@ class CharacterManager(models.Manager):
         c.charisma=form_data['charisma']
         c.save()
 
-class Character(models.model):
+class Character(models.Model):
     ### META ###
     user = models.ForeignKey(User)
     ### INFO ###
@@ -45,7 +45,7 @@ class Character(models.model):
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)
     ### STATS ###
-	curr_hp = models.IntegerField()
+    curr_hp = models.IntegerField()
     max_hp = models.IntegerField()
     damage = models.IntegerField()
     armor = models.IntegerField()
@@ -55,3 +55,4 @@ class Character(models.model):
     intelligence = models.IntegerField()
     wisdom = models.IntegerField()
     charisma = models.IntegerField()
+    manager = CharacterManager()

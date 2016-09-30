@@ -17,5 +17,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'^', include('apps.loginreg.urls', namespace='login')),
-    url(r'^sheets', include('apps.sheets.urls', namespace='sheets'))
+    url(r'^sheets/', include('apps.sheets.urls', namespace='sheets'))
 ]
